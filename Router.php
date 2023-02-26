@@ -1,7 +1,7 @@
 <?php
 $routes = [
-    ["route"=>"/", "file"=>"/home.html"],
-    ["route"=>"/contacts", "file"=>"/contacts.html"]
+    ["route"=>"/", "file"=>"/sample_pages/home.html"],
+    ["route"=>"/contacts", "file"=>"/sample_pages/contacts.html"]
 ];
 
 $router = new Router($routes);
@@ -12,8 +12,8 @@ class Router
     private string $routeUrl;
     private bool $siteIsInSubfolder;
     private $exitAfterSuccess = true;
-    private $exitAfterNotFound = false;
-    private $error404file = "/404.html";
+    private $exitAfterNotFound = true;
+    private $error404file = "/sample_pages/404.html";
 
     public function __construct($routes=[])
     {
