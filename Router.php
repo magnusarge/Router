@@ -36,7 +36,7 @@ class Router
     private function route($routes): void
     {
         foreach ($routes as $route) {
-            if ( isset($route['route']) && $route['route'] === $this->routeUrl ) {
+            if ( isset($route['route']) && $this->compareRoutes($route['route'], $this->routeUrl) ) {
                 if ( isset($route['file']) && file_exists(__DIR__ . $route['file']) ) {
                     include __DIR__ . $route['file'];
                     if ( $this->exitAfterSuccess ) exit();
@@ -45,6 +45,10 @@ class Router
             }
         }
         $this->notFound();     
+    }
+
+    private function compareRoutes($route1, $route2): bool {
+        return strtoupper($route1) === strtoupper($route2);
     }
 
     private function notFound(): void
