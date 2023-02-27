@@ -47,8 +47,22 @@ class Router
         $this->notFound();     
     }
 
-    private function compareRoutes($route1, $route2): bool {
-        return strtoupper($route1) === strtoupper($route2);
+    private function compareRoutes($route1, $route2): bool
+    {
+        return $this->formatRouteString($route1) === $this->formatRouteString($route2);
+    }
+
+    private function formatRouteString($route): string
+    {
+        return strtoupper($this->removeEndingSlash($route));
+    }
+
+    private function removeEndingSlash($string): string
+    {
+        if ( strlen($string) > 1 && str_ends_with($string, '/') ) {
+            return substr($string, 0, -1);
+        }
+        return $string;
     }
 
     private function notFound(): void
